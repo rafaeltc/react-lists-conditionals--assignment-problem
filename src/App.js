@@ -3,6 +3,7 @@ import ValidationComponent from './ValidationComponent/ValidationComponent';
 import CharComponent from './CharComponent/CharComponent';
 import './App.css';
 
+
 const App = props => {
 
     /* app inline styles */
@@ -34,6 +35,10 @@ const App = props => {
       });
     }
 
+    let charComponentList = state.inputValue.split("").map((c, index) => {
+      return <CharComponent char={c} key={index} onClick={removeCharHandler.bind(this,index)}></CharComponent>
+    })
+
     /* JSX */
     return (
       <div className="App">
@@ -51,11 +56,7 @@ const App = props => {
           <input onChange={updateInputHandler} value={state.inputValue}></input>
           <p>length: {state.inputValue.length}</p>
           <ValidationComponent textLength={state.inputValue.length}></ValidationComponent>
-          {
-            state.inputValue.split("").map((c, index) => {
-              return <CharComponent char={c} key={index} onClick={removeCharHandler.bind(this,index)}></CharComponent>
-            })
-          }
+          {charComponentList}
         </div>
       </div>
     );
